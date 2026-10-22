@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SQORJ MONTAGE — монтаж Reels, Shorts и TikTok</title>
+<meta name="description" content="Монтаж вертикальных видео для экспертов, предпринимателей и блогеров.">
+<style>
+@font-face{font-family:Onest;font-weight:400;font-display:swap;src:url(fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Onest;font-weight:400;font-display:swap;src:url(fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Onest;font-weight:500;font-display:swap;src:url(fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Onest;font-weight:500;font-display:swap;src:url(fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Onest;font-weight:700;font-display:swap;src:url(fonts/onest-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Onest;font-weight:700;font-display:swap;src:url(fonts/onest-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--bg:#fff;--ink:#0e0e12;--ink2:#2c2c34;--acc:#7C3AED;--line:#e4e1ee;--pad:clamp(18px,4vw,40px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 Onest,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--pad)}
+#stars{position:fixed;left:0;top:0;width:100%;z-index:0;pointer-events:none;will-change:transform}
+nav,header,section,footer,.strip{position:relative;z-index:1}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;height:64px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:.01em}
+.logo img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.links{display:flex;gap:clamp(14px,3vw,32px);font-size:15px;font-weight:500}.links a{text-decoration:none}.links a:hover{color:var(--acc)}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 24px;border-radius:99px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);text-decoration:none;font:500 15px Onest,sans-serif;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.btn:hover{background:var(--ink);color:#fff}
+.btn.dark{background:var(--ink);color:#fff}.btn.dark:hover{background:var(--acc);border-color:var(--acc)}
+.btn.dark i{width:24px;height:24px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;font-style:normal;font-size:14px}
+.dot{width:7px;height:7px;border-radius:50%;background:#a78bfa}
+@media(max-width:760px){.links{display:none}}
+/* hero */
+.hero{padding:clamp(100px,14vh,130px) 0 clamp(24px,4vh,40px)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,60px);align-items:center}
+.hero.solo .wrap{grid-template-columns:1fr;text-align:center;justify-items:center}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 8px;border:1px solid var(--line);border-radius:99px;font-size:14px;font-weight:500;background:#fff}
+.badge span{display:flex}.badge img{width:24px;height:24px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-left:-8px}.badge img:first-child{margin:0}
+h1{font:700 clamp(32px,4.5vw,54px)/1.06 Onest,sans-serif;letter-spacing:-.045em;margin:18px 0 16px}
+h1 b{color:var(--acc);font-weight:700;display:block}
+.lead{font-size:clamp(16px,1.6vw,19px);color:var(--ink2);max-width:28em;margin-bottom:24px}
+.in{opacity:0;transform:translateY(14px);animation:in .7s cubic-bezier(.2,.7,.1,1) forwards}
+@keyframes in{to{opacity:1;transform:none}}
+/* отзывы */
+.revs{display:flex;flex-direction:column;gap:6px;padding:10px 0}
+.rv{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:0 14px 34px rgba(30,20,60,.1);transition:transform .55s cubic-bezier(.2,.9,.3,1.25),box-shadow .3s}
+.rv:nth-child(1){transform:rotate(-2deg) translateX(-8px)}.rv:nth-child(2){transform:rotate(1.6deg) translateX(24px)}
+.revs:hover .rv:nth-child(1){transform:rotate(1.2deg) translate(18px,-4px)}.revs:hover .rv:nth-child(2){transform:rotate(-1.6deg) translate(-8px,6px)}
+.revs .rv:hover{transform:rotate(0) scale(1.04) translateX(0);z-index:2;box-shadow:0 20px 44px rgba(124,58,237,.2)}
+.rv h4{display:flex;align-items:center;gap:12px;font:600 15px Onest,sans-serif;margin-bottom:10px}.rv h4 img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.rv p{font-size:15px;color:var(--ink2);line-height:1.45}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.rv:nth-child(n){transform:none!important}.revs{gap:12px}}
+/* видео */
+.thumb{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#e9e6f2;border:1px solid var(--line);isolation:isolate;box-shadow:0 10px 28px rgba(30,20,60,.1)}
+.thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.1,1)}
+.card:hover .thumb video,.rc:hover .thumb video{transform:scale(1.04)}
+.play{position:absolute;right:12px;top:12px;width:42px;height:42px;border-radius:50%;background:var(--ink);display:grid;place-items:center;transition:background .2s,transform .2s}
+.play:after{content:"";margin-left:3px;border:6px solid transparent;border-left:11px solid #fff;border-right:0}
+.card:hover .play,.rc:hover .play{background:var(--acc);transform:scale(1.08)}
+.card,.rc{min-width:0;background:none;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer;display:block}
+.strip{overflow:hidden;padding:18px 0 34px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.track{display:flex;width:max-content;animation:slide 90s linear infinite}
+.strip:hover .track,.strip:focus-within .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.rc{width:clamp(150px,17vw,230px);margin-right:clamp(12px,1.4vw,18px);flex:none}
+/* секции */
+section{padding:clamp(44px,7vw,90px) 0}
+h2{font:700 clamp(28px,4.4vw,48px)/1.06 Onest,sans-serif;letter-spacing:-.04em;margin-bottom:12px}h2 span{color:var(--acc)}
+.sub{color:var(--ink2);max-width:34em;margin-bottom:clamp(26px,4vw,44px)}
+.c{text-align:center}.c .sub{margin-left:auto;margin-right:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:clamp(14px,2vw,26px)}
+@media(max-width:560px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+.card{width:100%}.meta{padding:12px 2px 0}.meta h3{font:600 16px Onest,sans-serif}.meta p{color:var(--ink2);font-size:14px;margin-top:3px}
+/* клиенты */
+.cl{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(12px,2vw,22px);max-width:860px;margin:0 auto}
+.cli{display:flex;flex-direction:column;align-items:center;gap:8px;width:clamp(72px,10vw,92px);text-decoration:none;font-size:13px;font-weight:500;text-align:center}
+.av{position:relative;width:100%;aspect-ratio:1;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line),0 8px 20px rgba(30,20,60,.12);transition:transform .3s cubic-bezier(.2,.9,.3,1.3)}
+.av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.av i{position:absolute;right:-2px;bottom:-2px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;border:2px solid #fff}
+.av svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.cli:hover .av{transform:translateY(-5px) scale(1.06)}
+.rvs2{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:860px;margin:clamp(28px,4vw,44px) auto 0;text-align:left}
+.rvs2 .rv{transform:none!important;display:flex;flex-direction:column}
+.rvs2 .rv:hover{transform:translateY(-5px)!important;box-shadow:0 20px 44px rgba(124,58,237,.2)}
+@media(max-width:700px){.rvs2{grid-template-columns:1fr}}
+/* about */
+.abox{display:grid;grid-template-columns:1fr 1.5fr .9fr;border:1.5px solid var(--ink);border-radius:28px;overflow:hidden;background:#fff;margin-top:clamp(20px,3vw,32px)}
+.abox>div{padding:clamp(22px,3vw,36px)}
+.a1{border-right:1.5px solid var(--ink);text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.me{width:112px;height:112px;border-radius:50%;object-fit:cover;border:1.5px solid var(--ink);margin-bottom:8px}
+.a1 b{font:700 22px Onest,sans-serif}.a1 p{margin-top:10px;font-size:15px;color:var(--ink2);max-width:19em}
+.a2{display:flex;flex-direction:column;justify-content:space-between;gap:26px}
+.a2 .big{font-size:clamp(18px,1.9vw,23px);line-height:1.3;font-weight:600;letter-spacing:-.02em}.a2 p+p{margin-top:14px;color:var(--ink2);font-size:16px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.a3{border-left:1.5px solid var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px}
+.a3 svg{width:40px;height:40px;fill:none;stroke:var(--acc);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.a3 b{font:600 20px Onest,sans-serif}
+.lists{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2.5vw,28px);margin-top:28px}
+.lists>div{display:flex;flex-direction:column}.lists h4{font:600 14px Onest,sans-serif;letter-spacing:.14em;text-transform:uppercase;text-align:center;margin-bottom:12px}
+.lists ul{flex:1;border:1.5px solid var(--ink);border-radius:22px;padding:18px 22px 18px 38px;line-height:1.9;background:#fff}
+@media(max-width:860px){.abox{grid-template-columns:1fr}.a1,.a3{border:0}.a1{border-bottom:1.5px solid var(--ink)}.a3{border-top:1.5px solid var(--ink)}.lists{grid-template-columns:1fr}}
+/* контакты */
+.contact .wrap{text-align:center}.contact h2{max-width:11em;margin:0 auto 6px;font-size:clamp(30px,5.4vw,64px)}
+.thx{font:600 clamp(18px,2.6vw,30px)/1.2 Onest,sans-serif;letter-spacing:-.03em;color:var(--acc);margin-bottom:18px}
+.contact .sub{margin-left:auto;margin-right:auto}
+.row{display:flex;align-items:flex-start;justify-content:center;max-width:560px;margin:0 auto}
+.ct{display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none;font-size:14px;font-weight:500}
+.ct i{width:clamp(60px,11vw,76px);aspect-ratio:1;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;background:#fff;transition:background .2s,color .2s,border-color .2s,transform .3s cubic-bezier(.2,.7,.1,1)}
+.ct:hover i{background:var(--acc);border-color:var(--acc);color:#fff;transform:translateY(-4px)}
+.ct[aria-disabled=true]{opacity:.35;pointer-events:none}
+.ct svg{width:clamp(24px,4.5vw,30px);height:clamp(24px,4.5vw,30px);fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dash{flex:1;min-width:16px;max-width:110px;height:1.5px;background:var(--ink);opacity:.35;margin-top:clamp(30px,5.5vw,38px)}
+footer{padding:26px var(--pad) 40px;font-size:14px;text-align:center}
+/* плеер */
+.modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(14,14,18,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.modal.on{opacity:1;visibility:visible}
+.pl{width:min(92vw,calc((100dvh - 150px)*9/16));transform:translateY(24px) scale(.97);transition:transform .35s cubic-bezier(.2,.7,.1,1)}.modal.on .pl{transform:none}
+.screen{aspect-ratio:9/16;border-radius:20px;overflow:hidden;background:#000}.screen video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+.cap{padding:14px 4px 0;font-size:14px;color:#fff;min-height:1.5em}
+.x{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:46px;height:46px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:22px;cursor:pointer;line-height:1}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important;scroll-behavior:auto!important}.strip{overflow-x:auto}.track{animation:none}}
+</style></head>
+<body id="top">
+<canvas id="stars"></canvas>
+<nav><div class="wrap">
+  <a class="logo" href="#top"><img src="img/avatar.jpg" alt="">SQORJ</a>
+  <div class="links"><a href="#reels">Рилсы</a><a href="#clients">Клиенты</a><a href="#projects">Проекты</a><a href="#about">Обо мне</a></div>
+  <a class="btn dark" id="navtg" href="#contact">Написать <span class="dot"></span></a>
+</div></nav>
+
+<header class="hero" id="hero"><div class="wrap">
+  <div>
+    <div class="badge in" id="badge"><span id="badgeav"></span>Работаю с авторами</div>
+    <h1 class="in" style="animation-delay:.08s"><b>Монтаж Reels и Shorts</b>для экспертов, бизнеса и блогеров</h1>
+    <p class="lead in" style="animation-delay:.16s">Ритм, субтитры, акценты и звук. Работаю лично и отвечаю за каждый ролик.</p>
+    <a class="btn dark in" style="animation-delay:.24s" href="#contact">Обсудить проект <i>→</i></a>
+  </div>
+  <div class="revs in" id="revs" style="animation-delay:.2s"></div>
+</div></header>
+
+<div class="strip" id="reels" aria-label="Примеры моего стиля"><div class="track" id="track"></div></div>
+
+<section id="clients"><div class="wrap c">
+  <h2>Мне <span>доверяют</span></h2>
+  <p class="sub">Авторы и специалисты, у которых есть аккаунты в Instagram.</p>
+  <div class="cl" id="cl"></div>
+  <div class="rvs2" id="rvs2"></div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2>Мои <span>проекты</span></h2>
+  <p class="sub">Ролики, которые я монтировал для бизнесов и экспертов. Нажмите, чтобы посмотреть со звуком.</p>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <h2 class="c">Обо <span>мне</span></h2>
+  <div class="abox">
+    <div class="a1"><img class="me" src="img/avatar.jpg" alt="SQORJ" width="112" height="112"><b>SQORJ</b><span>Монтажёр Reels и Shorts</span><p>Монтирую короткие вертикальные видео для экспертов, предпринимателей и блогеров.</p></div>
+    <div class="a2"><div><p class="big">Хороший материал теряется, если его скучно смотреть.</p><p>Я собираю ролик так, чтобы его хотелось досмотреть: выстраиваю ритм и структуру, оформляю субтитры, расставляю акценты и работаю со звуком.</p></div>
+      <div class="btns"><a class="btn" href="#projects">Проекты</a><a class="btn" href="#contact">Связаться</a></div></div>
+    <div class="a3"><svg viewBox="0 0 24 24" id="a3i"></svg><b>Telegram</b><a class="btn" id="a3l" target="_blank" rel="noopener">Написать</a></div>
+  </div>
+  <div class="lists">
+    <div><h4>Услуги</h4><ul><li>Монтаж Reels</li><li>Монтаж Shorts</li><li>Субтитры и звук</li></ul></div>
+    <div><h4>Фокус</h4><ul><li>Удержание внимания</li><li>Ритм и темп</li><li>Структура ролика</li></ul></div>
+    <div><h4>Инструменты</h4><ul><li>Premiere Pro</li><li>After Effects</li></ul></div>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+  <h2>Есть видео для монтажа? Пишите в лс,</h2>
+  <p class="thx">буду рад сотрудничеству</p>
+  <p class="sub">Пришлите исходники и пример ролика, который нравится. Отвечу, что можно сделать.</p>
+  <div class="row" id="links"></div>
+</div></section>
+<footer>© SQORJ MONTAGE</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Просмотр ролика"><button class="x" id="close" aria-label="Закрыть">×</button><div class="pl"><div class="screen" id="screen"></div><div class="cap" id="capt"></div></div></div>
+
+<script>
+/* ============ ЗДЕСЬ ВСЁ, ЧТО НУЖНО РЕДАКТИРОВАТЬ ============ */
+const CONTACTS = [
+  { key: "tg", name: "Telegram",  url: "https://t.me/houhw" },
+  { key: "yt", name: "YouTube",   url: "https://youtube.com/@sqormont" },
+  { key: "ig", name: "Instagram", url: "https://www.instagram.com/sqorjimont_" }
+];
+// ОТЗЫВЫ. Первые два: на первом экране. Следующие два: под кружками "Мне доверяют".
+// photo: фото автора отзыва (сейчас временные из блока "Мне доверяют"), name: имя или ник, если нужно.
+const REVIEWS = [
+  { name: "", photo: "img/clients/c03.jpg", text: "Отлично монтирует), быстро понял, какой стиль мне нужен. По итогу всё понравилось, заказываю у него до сих пор." },
+  { name: "", photo: "img/clients/c07.jpg", text: "Работать с этим монтажёром комфортно, всегда на связи, правки вносит без проблем. Результатом доволен, буду обращаться ещё." }
+];
+const REVIEWS2 = [
+  { name: "", photo: "img/clients/c08.jpg", text: "Изначально долго искал монтажёра, который сможет нормально передать мой стиль в видео. С Даниилом быстро нашли общий язык, практически сразу понял, что мне нужно. По качеству всё устраивает, ролики получаются именно такими, как я хотел. Продолжаем работать вместе." },
+  { name: "", photo: "img/clients/c13.jpg", text: "Хочу отметить хорошую работу Даниила. Монтаж качественный, сроки не затягивает, к пожеланиям относится внимательно. Если нужно что-то изменить, спокойно вносит правки, без лишних вопросов и споров. В целом сотрудничеством доволен, сейчас продолжаю заказывать у него монтаж." }
+];
+// КЛИЕНТЫ ("Мне доверяют"). name и url (ссылка на Instagram) можно заполнить позже.
+const CLIENTS = [
+  { photo: "img/clients/c01.jpg", name: "", url: "" }, { photo: "img/clients/c02.jpg", name: "", url: "" },
+  { photo: "img/clients/c03.jpg", name: "", url: "" }, { photo: "img/clients/c04.jpg", name: "", url: "" },
+  { photo: "img/clients/c05.jpg", name: "", url: "" }, { photo: "img/clients/c06.jpg", name: "", url: "" },
+  { photo: "img/clients/c07.jpg", name: "", url: "" }, { photo: "img/clients/c08.jpg", name: "", url: "" },
+  { photo: "img/clients/c09.jpg", name: "", url: "" }, { photo: "img/clients/c10.jpg", name: "", url: "" },
+  { photo: "img/clients/c11.jpg", name: "", url: "" }, { photo: "img/clients/c12.jpg", name: "", url: "" },
+  { photo: "img/clients/c13.jpg", name: "", url: "" }, { photo: "img/clients/c14.jpg", name: "", url: "" },
+  { photo: "img/clients/c15.jpg", name: "", url: "" }, { photo: "img/clients/c16.jpg", name: "", url: "" }
+];
+// РИЛСЫ: бегущая лента под первым экраном.
+const REELS = [
+  { video: "videos/saas.mp4",      poster: "posters/saas.jpg" },
+  { video: "videos/shal.mp4",      poster: "posters/shal.jpg" },
+  { video: "videos/inst-it.mp4",   poster: "posters/inst-it.jpg" },
+  { video: "videos/podpravil.mp4", poster: "posters/podpravil.jpg" },
+  { video: "videos/deshevle.mp4",  poster: "posters/deshevle.jpg" },
+  { video: "videos/ae.mp4",        poster: "posters/ae.jpg" },
+  { video: "videos/golos.mp4",     poster: "posters/golos.jpg" }
+];
+// ПРОЕКТЫ: title, client, desc можно оставлять пустыми "".
+const PROJECTS = [
+  { title: "Проект 1", desc: "", client: "", video: "videos/thai-kvartira.mp4", poster: "posters/thai-kvartira.jpg" },
+  { title: "Проект 2", desc: "", client: "", video: "videos/subtitry.mp4",       poster: "posters/subtitry.jpg" },
+  { title: "Проект 3", desc: "", client: "", video: "videos/ui.mp4",             poster: "posters/ui.jpg" },
+  { title: "Проект 4", desc: "", client: "", video: "videos/ravai.mp4",          poster: "posters/ravai.jpg" },
+  { title: "Проект 5", desc: "", client: "", video: "videos/krem.mp4",           poster: "posters/krem.jpg" },
+  { title: "Проект 6", desc: "", client: "", video: "videos/design.mp4",         poster: "posters/design.jpg" },
+  { title: "Проект 7", desc: "", client: "", video: "videos/garudo.mp4",         poster: "posters/garudo.jpg" },
+  { title: "Проект 8", desc: "", client: "", video: "videos/gobeleny.mp4",       poster: "posters/gobeleny.jpg" },
+  { title: "Проект 9", desc: "", client: "", video: "videos/shveynye.mp4",       poster: "posters/shveynye.jpg" },
+  { title: "Проект 10", desc: "", client: "", video: "videos/zvuk-rebenok.mp4",  poster: "posters/zvuk-rebenok.jpg" },
+  { title: "Проект 11", desc: "", client: "", video: "videos/investor-phuket.mp4", poster: "posters/investor-phuket.jpg" },
+  { title: "Проект 12", desc: "", client: "", video: "videos/metall.mp4", poster: "posters/metall.jpg" },
+  { title: "Проект 13", desc: "", client: "", video: "videos/naym.mp4", poster: "posters/naym.jpg" },
+  { title: "Проект 14", desc: "", client: "", video: "videos/alipay.mp4", poster: "posters/alipay.jpg" },
+  { title: "Проект 15", desc: "", client: "", video: "videos/smm.mp4", poster: "posters/smm.jpg" },
+  { title: "Проект 16", desc: "", client: "", video: "videos/pak.mp4", poster: "posters/pak.jpg" }
+];
+/* ========================================================== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LISTS = { reels: REELS, projects: PROJECTS };
+const ICONS = {
+  tg: '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+  yt: '<path d="M2.5 17a24.1 24.1 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>',
+  ig: '<rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z"/><path d="M17.5 6.5h.01"/>'
+};
+const tgc = CONTACTS.find(c => c.key === 'tg');
+if (tgc && tgc.url) { $('navtg').href = tgc.url; $('navtg').target = '_blank'; $('navtg').rel = 'noopener'; $('a3l').href = tgc.url; }
+$('a3i').innerHTML = ICONS.tg;
+const ct = c => { const inner = `<i><svg viewBox="0 0 24 24">${ICONS[c.key]}</svg></i>${c.name}`;
+  return c.url ? `<a class="ct" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>` : `<a class="ct" aria-disabled="true" title="Ссылка не указана">${inner}</a>`; };
+$('links').innerHTML = CONTACTS.map(ct).join('<span class="dash"></span>');
+const rvHTML = r => `<div class="rv"><h4>${r.photo ? `<img src="${esc(r.photo)}" alt="">` : ''}${esc(r.name || '')}</h4><p>${esc(r.text || '')}</p></div>`;
+if (REVIEWS2.length) $('rvs2').innerHTML = REVIEWS2.map(rvHTML).join(''); else $('rvs2').remove();
+// отзывы: если пусто, блок скрыт и первый экран по центру
+if (REVIEWS.length) {
+  $('revs').innerHTML = REVIEWS.slice(0, 2).map(rvHTML).join('');
+} else { $('revs').remove(); $('hero').classList.add('solo'); }
+$('badgeav').innerHTML = CLIENTS.slice(0, 3).map(c => `<img src="${esc(c.photo)}" alt="">`).join('');
+// клиенты
+$('cl').innerHTML = CLIENTS.map(c => {
+  const inner = `<div class="av"><img src="${esc(c.photo)}" alt="${esc(c.name || 'Клиент')}" loading="lazy"><i><svg viewBox="0 0 24 24">${ICONS.ig}</svg></i></div>${c.name ? esc(c.name) : ''}`;
+  return c.url ? `<a class="cli" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="cli">${inner}</div>`;
+}).join('');
+// видео
+const thumb = w => `<div class="thumb"><video src="${esc(w.video)}" poster="${esc(w.poster || '')}" preload="none" muted loop playsinline></video><span class="play"></span></div>`;
+const half = [0, 1, 2].flatMap(() => REELS.map((w, i) => ({ w, i })));
+$('track').innerHTML = [...half, ...half].map(({ w, i }) => `<button class="rc" data-list="reels" data-i="${i}" aria-label="Смотреть рилс ${i + 1}">${thumb(w)}</button>`).join('');
+$('grid').innerHTML = PROJECTS.map((w, i) => { const sub = [w.client, w.desc].filter(Boolean).join(' · ');
+  return `<button class="card" data-list="projects" data-i="${i}" aria-label="Смотреть: ${esc(w.title || 'проект ' + (i + 1))}">${thumb(w)}<div class="meta">${w.title ? `<h3>${esc(w.title)}</h3>` : ''}${sub ? `<p>${esc(sub)}</p>` : ''}</div></button>`; }).join('');
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const io = new IntersectionObserver(es => es.forEach(e => { e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause(); }), { threshold: .3 });
+  document.querySelectorAll('.thumb video').forEach(v => io.observe(v));
+}
+// плеер
+const modal = $('modal'), screen = $('screen'); let last;
+function open(list, i) { const w = LISTS[list][i]; if (!w) return; last = document.activeElement;
+  screen.innerHTML = `<video src="${esc(w.video)}" poster="${esc(w.poster || '')}" controls autoplay playsinline preload="auto"></video>`;
+  $('capt').textContent = [w.title, w.client].filter(Boolean).join(' · '); modal.classList.add('on'); document.body.style.overflow = 'hidden'; $('close').focus(); }
+function close() { modal.classList.remove('on'); document.body.style.overflow = ''; const v = screen.querySelector('video'); if (v) v.pause(); setTimeout(() => { screen.innerHTML = ''; }, 250); if (last) last.focus(); }
+document.addEventListener('click', e => { const c = e.target.closest('[data-list]'); if (c) open(c.dataset.list, +c.dataset.i); });
+$('close').onclick = close; modal.addEventListener('click', e => { if (e.target === modal) close(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('on')) close(); });
+// звёзды (чёрные на светлом фоне)
+const cv = $('stars'), cx = cv.getContext('2d');
+function drawStars() { const dpr = Math.min(devicePixelRatio || 1, 2), w = innerWidth, h = Math.round(innerHeight * 1.3);
+  cv.width = w * dpr; cv.height = h * dpr; cv.style.height = h + 'px'; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  let seed = 7; const r = () => (seed = seed * 16807 % 2147483647) / 2147483647; const n = Math.max(70, Math.round(w * h / 7500));
+  for (let k = 0; k < n; k++) { const x = r() * w, y = r() * h, big = r() < .07, s = big ? 1.8 : .6 + r() * .9;
+    cx.fillStyle = `rgba(14,14,18,${(.18 + r() * .5).toFixed(2)})`; cx.beginPath(); cx.arc(x, y, s / 2 + .2, 0, 6.2832); cx.fill(); } }
+let rw = innerWidth; drawStars();
+addEventListener('resize', () => { if (innerWidth !== rw) { rw = innerWidth; drawStars(); } });
+addEventListener('scroll', () => { cv.style.transform = `translateY(${-Math.min(scrollY * .08, innerHeight * .28)}px)`; }, { passive: true });
+</script></body></html>
